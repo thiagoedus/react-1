@@ -22,7 +22,7 @@ export const Home = () => {
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
-  const filteredPosts = !!searchValue
+  const filteredPosts = searchValue
     ? allPosts.filter((post) => {
         return post.title.toLowerCase().includes(searchValue.toLowerCase());
       })
@@ -33,10 +33,10 @@ export const Home = () => {
 
     setPosts(postsAndPhotos.slice(page, postsPerPage));
     setAllPosts(postsAndPhotos);
-  }, [])
+  }, []);
 
   useEffect(() => {
-    console.log('Oi')
+    console.log("Oi");
     handleLoadPosts(0, postsPerPage);
   }, [handleLoadPosts, postsPerPage]);
 
@@ -73,132 +73,42 @@ export const Home = () => {
 
       <div className="button-container">
         {!searchValue && (
-          <Button
-            className="button-container"
-            text="Load More"
-            onClick={loadMorePosts}
-            disabled={noMorePosts}
-          />
+          <Button className="button-container" text="Load More" onClick={loadMorePosts} disabled={noMorePosts} />
         )}
       </div>
     </section>
   );
 };
 
-// export class Home2 extends Component {
+// import { Component } from 'react'
+// import './styles.css'
+
+// export class Home extends Component {
 //   state = {
-//     posts: [],
-//     allPosts: [],
-//     page: 0,
-//     postsPerPage: 6,
-//     searchValue: ""
-//   };
-
-//   async componentDidMount() {
-//     await this.loadPosts();
+//     counter: 0
 //   }
 
-//   loadPosts = async () => {
-//     const{page, postsPerPage} = this.state
-//     const postsAndPhotos = await loadPosts();
+//   handleClick = () => {
 
-//     this.setState({
-//       posts:postsAndPhotos.slice(page, postsPerPage),
-//       allPosts: postsAndPhotos
-//     });
-//   }
-
-//   loadMorePosts = () => {
-//     const {
-//       posts,
-//       allPosts,
-//       page,
-//       postsPerPage,
-//     } = this.state
-
-//     const nextPage = page + postsPerPage;
-//     const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage)
-//     posts.push(...nextPosts)
-
-//     this.setState({
-//       posts, page: nextPage
-//     })
-//   }
-
-//   handleChange = (e) => {
-//     const {value} = e.target;
-//     this.setState({
-//       searchValue: value
-//     })
-//   }
-
-//   render() {
-//     // return <h1>Olá</h1>
-//     // const name = this.state.name;
-//     const {posts, page, postsPerPage, allPosts, searchValue} = this.state;
-
-//     const noMorePosts = page + postsPerPage >= allPosts.length;
-
-//     const filteredPosts =
-//     !!searchValue ?
-//     allPosts.filter(post => {
-//       return post.title.toLowerCase().includes(searchValue.toLowerCase());
-//     })
-//     :
-//     posts;
-
-//     return (
-//       <section className='container'>
-
-//         <div className="search-container">
-//           {!!searchValue && (
-//             <>
-//             <h1>Search value: {searchValue}</h1>
-//             </>
-//           )}
-
-//           <TextInput searchValue={searchValue} handleChange={this.handleChange}/>
-//         </div>
-
-//         {filteredPosts.length > 0 && (
-//           <Posts posts={filteredPosts}/>
-//         )}
-
-//         {filteredPosts.length === 0 && (
-//           <p>Não existem posts</p>
-//         )}
-
-//         <div className='button-container'>
-//           {!searchValue && (
-//             <Button className ='button-container' text='Load More'
-//             onClick={this.loadMorePosts}
-//             disabled={noMorePosts}/>
-//           )}
-//         </div>
-
-//       </section>
+//     this.setState(
+//       (prevState, prevProps) => {
+//         console.log("PREV" + prevState.counter)
+//         return {counter: prevState.counter + 1}
+//       },
+//       () => {
+//         console.log("POST" + this.state.counter);
+//       }
 //     );
 
 //   }
-// }
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Olá mundo
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
+//   render() {
+
+//     return (
+//       <div className='container'>
+//         <h1>{this.state.counter}</h1>
+//         <button onClick={this.handleClick}>Increment</button>
+//       </div>
+//     )
+//   }
 // }
