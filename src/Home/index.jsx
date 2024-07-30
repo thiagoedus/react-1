@@ -1,9 +1,9 @@
-import "./styles.css";
-import { useEffect, useState, useCallback } from "react";
-import { loadPosts } from "../utils/load-posts";
-import { Posts } from "../components/Posts";
-import { Button } from "../components/Button";
-import { TextInput } from "../components/TextInput";
+import './styles.css';
+import { useEffect, useState, useCallback } from 'react';
+import { loadPosts } from '../utils/load-posts';
+import { Posts } from '../components/Posts';
+import { Button } from '../components/Button';
+import { TextInput } from '../components/TextInput';
 
 export const Home = () => {
   // state = {
@@ -18,7 +18,7 @@ export const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [postsPerPage] = useState(10);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
@@ -36,7 +36,7 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Oi");
+    console.log('Oi');
     handleLoadPosts(0, postsPerPage);
   }, [handleLoadPosts, postsPerPage]);
 
