@@ -3,6 +3,7 @@
 
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { Home } from '.';
+import userEvent from '@testing-library/user-event';
 
 // const handlers = [
 //   rest.get('*jsonplaceholder.typicode.com*', async (req, res, ctx) => {
@@ -64,5 +65,30 @@ describe('<Home />', () => {
     const button = screen.getByRole('button', { name: /Load More/i });
 
     expect(button).toBeInTheDocument();
+  });
+
+  it('should search for posts', async () => {
+    render(<Home />);
+    const noMorePosts = screen.getByText('Não existem posts');
+
+    // expect.assertions(2);
+
+    await waitForElementToBeRemoved(noMorePosts);
+
+    const search = screen.getByPlaceholderText(/type your search/i);
+
+    expect(screen.getByRole('heading', { name: 'qui est esse 2' })).toBeInTheDocument();
+
+    userEvent.type(search, 'teste vazio');
+
+    expect(screen.queryByRole('heading', { name: 'qui est esse 2' })).not.toBeInTheDocument();
+
+    userEvent.clear(search);
+
+    expect(screen.getByRole('heading', { name: 'qui est esse 2' })).toBeInTheDocument();
+
+    userEvent.type(search, 'teste vazio');
+
+    expect(screen.getByText('Não existem posts')).toBeInTheDocument();
   });
 });
